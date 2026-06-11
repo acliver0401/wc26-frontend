@@ -155,7 +155,7 @@ export function LineupDrawer({ match, onClose }: Props) {
         </div>
 
         {/* Insight */}
-        {home.insight && (
+        {match.lineup_info.insight && (
           <div
             style={{
               background: 'rgba(255,193,7,0.08)',
@@ -169,7 +169,7 @@ export function LineupDrawer({ match, onClose }: Props) {
             }}
           >
             <span style={{ fontWeight: 600, color: 'var(--accent)' }}>📋 临场分析：</span>
-            {home.insight}
+            {match.lineup_info.insight}
           </div>
         )}
 
