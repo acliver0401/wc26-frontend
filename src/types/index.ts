@@ -27,6 +27,10 @@ export interface Prediction {
   precip_prob_pct?: number
   weather_source?: string
   stadium_id?: string
+  home_as?: number
+  away_as?: number
+  home_dw?: number
+  away_dw?: number
   home_form?: number
   away_form?: number
   home_injuries?: number
