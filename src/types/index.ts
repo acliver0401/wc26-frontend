@@ -1,3 +1,20 @@
+export interface LineupPlayer {
+  name: string
+  pos: string
+  rating: number
+}
+
+export interface LineupTeam {
+  formation: string
+  players: LineupPlayer[]
+}
+
+export interface LineupDetails {
+  home: LineupTeam
+  away: LineupTeam
+  insight: string
+}
+
 export interface Prediction {
   date: string
   home: string
@@ -36,6 +53,12 @@ export interface Prediction {
   home_injuries?: number
   away_injuries?: number
   warnings: string[]
+  prediction_status?: string
+  lineup_info?: LineupDetails | null
+  home_formation?: string
+  away_formation?: string
+  home_formation_label?: string
+  away_formation_label?: string
 }
 
 export interface MediaSentiment {
@@ -91,10 +114,12 @@ export interface DashboardData {
     total_matches: number
     backtest_accuracy: number
     training_samples: number
+    live_lineup_count?: number
     cache?: {
       predictions_updated_at?: string | null
       weather_updated_at?: string | null
       injuries_updated_at?: string | null
+      lineups_updated_at?: string | null
     }
   }
   predictions: Prediction[]

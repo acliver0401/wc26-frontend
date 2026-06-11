@@ -4,13 +4,21 @@ import { EnvironmentalBadges, EnvironmentalWarnings } from './EnvironmentalBadge
 export function LatestMatchday({ match }: { match: Prediction }) {
   if (!match) return null
   const pc = match.pred_r === 'H' ? 'var(--home)' : match.pred_r === 'D' ? 'var(--draw)' : 'var(--away)'
+  const isLive = match.prediction_status === 'Live-Lineup'
 
   return (
-    <div className="cd cd-md">
+    <div className="cd cd-md" style={isLive ? { borderLeft: '3px solid #43a047' } : undefined}>
       <div className="cd-h">
         <span className="cd-h-dot" />
         <h2>最新比赛日 · {match.date}</h2>
-        <span className="cd-h-b">MATCHDAY</span>
+        <span className="cd-h-b">
+          MATCHDAY
+          {isLive && (
+            <span style={{ marginLeft: 8, color: '#43a047', fontSize: 9, fontWeight: 600 }}>
+              🔒 首发已锁定
+            </span>
+          )}
+        </span>
       </div>
       <div className="tw">
         <table>
