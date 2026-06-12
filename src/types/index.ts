@@ -15,6 +15,13 @@ export interface LineupDetails {
   insight: string
 }
 
+export interface MatchResult {
+  home_score: number | null
+  away_score: number | null
+  outcome: 'H' | 'D' | 'A' | null
+  status: string  // 'FT' | 'LIVE' | 'HT' | 'NS'
+}
+
 export interface Prediction {
   date: string
   home: string
@@ -59,6 +66,7 @@ export interface Prediction {
   away_formation?: string
   home_formation_label?: string
   away_formation_label?: string
+  result?: MatchResult | null
 }
 
 export interface MediaSentiment {
@@ -106,6 +114,57 @@ export interface StadiumMeta {
   coordinates: { lat: number; lng: number }
 }
 
+export interface H2HBest {
+  home: number
+  away: number
+  draw: number
+}
+
+export interface ImpliedProbs {
+  home: number
+  away: number
+  draw: number
+}
+
+export interface MatchOdds {
+  home_team: string
+  away_team: string
+  commence_time: string
+  bookmaker_count: number
+  h2h: H2HBest | null
+  spreads: {
+    home_price: number
+    away_price: number
+    home_point: number
+    away_point: number
+  } | null
+  totals: {
+    over: number
+    under: number
+    point: number
+  } | null
+  implied_probs: ImpliedProbs | null
+}
+
+export interface OutrightTeam {
+  avg_price: number
+  best_price: number
+  implied_prob_pct: number
+  bookmaker_count: number
+}
+
+export interface OutrightOdds {
+  teams: Record<string, OutrightTeam>
+  top_5: { team: string; avg_price: number; best_price: number; implied_prob_pct: number; bookmaker_count: number }[]
+  updated_at: string | null
+}
+
+export interface OddsData {
+  updated_at: string | null
+  matches: Record<string, MatchOdds>
+  outrights: OutrightOdds
+}
+
 export interface DashboardData {
   meta: {
     title: string
@@ -115,6 +174,7 @@ export interface DashboardData {
     backtest_accuracy: number
     training_samples: number
     live_lineup_count?: number
+    completed_count?: number
     cache?: {
       predictions_updated_at?: string | null
       weather_updated_at?: string | null

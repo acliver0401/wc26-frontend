@@ -183,6 +183,21 @@ body {
   border-color: var(--border-hover);
   transform: translateY(-2px);
 }
+.pc-live {
+  border-color: rgba(67, 160, 71, 0.25) !important;
+  box-shadow: 0 0 20px rgba(67, 160, 71, 0.06);
+}
+.pc-live:hover {
+  border-color: rgba(67, 160, 71, 0.45) !important;
+}
+.pc-result {
+  opacity: 0.85;
+  border-color: rgba(100, 116, 139, 0.2) !important;
+}
+.pc-result:hover {
+  opacity: 1;
+  border-color: rgba(100, 116, 139, 0.4) !important;
+}
 .pc-d {
   position: absolute;
   top: 8px;
@@ -491,6 +506,10 @@ tr:hover td {
     opacity: 1;
     transform: translateY(0);
   }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
 /* Responsive */

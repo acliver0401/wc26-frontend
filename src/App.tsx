@@ -9,10 +9,11 @@ import { SocialHeatChart } from './components/SocialHeatChart'
 import { ScoreProbabilityChart } from './components/ScoreProbabilityChart'
 import { TeamAnalysisGrid } from './components/TeamAnalysisGrid'
 import { AllPredictionsTable } from './components/AllPredictionsTable'
+import { OddsWidget } from './components/OddsWidget'
 import { Footer } from './components/Footer'
 
 export default function App() {
-  const { data, loading, error } = useApi()
+  const { data, oddsData, loading, error } = useApi()
 
   if (loading) {
     return (
@@ -72,8 +73,10 @@ export default function App() {
         accuracy={data.meta.backtest_accuracy}
         trainingSamples={data.meta.training_samples}
         pendingPredictions={data.predictions.length}
+        liveLineupCount={data.meta.live_lineup_count ?? 0}
       />
-      <LatestMatchday match={data.predictions[0]} />
+      <LatestMatchday allPredictions={data.predictions} />
+      <OddsWidget predictions={data.predictions} oddsData={oddsData} />
       <HighConfidenceGrid predictions={highConf} />
       <BacktestChart />
       <div className="l2">
